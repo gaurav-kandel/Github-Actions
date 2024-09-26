@@ -1,0 +1,22 @@
+#Cache math_operator.py file 
+name: Math Operator
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Cache math_operator.py
+      uses: actions/cache@v2
+      with:
+        key: ${{ runner.os }}-math_operator
+        path: math_operator.py
+    - name: Run math_operator.py
+      run: python math_operator.py
+  print-data:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Print cached file
+      run: cat $GITHUB_WORKSPACE/math_operator.py
