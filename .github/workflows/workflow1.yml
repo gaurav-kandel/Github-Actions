@@ -2,6 +2,7 @@ name: Deploy My Code
 on: [push]
 jobs:
   test_my_code:
+    runs-on: ubuntu-latest
     steps:
       - name: Get My Code
         uses: actions/checkout@v2
@@ -13,6 +14,7 @@ jobs:
         run: python -m unittest test_math_operations.py
   deploy_my_code:
     needs: [test_my_code]
+    runs-on: ubuntu-latest
     steps:
       - name: Get My Code
         uses: actions/checkout@v2
