@@ -1,4 +1,5 @@
 name: Learning To Cache
+
 on: [push]
 
 jobs:
@@ -9,15 +10,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      
       - name: Create python file  
         run: echo 'print("Hello, World!")' > helloworld.py
+      
       - name: Cache helloworld file
         uses: actions/cache@v3
         with:
           path: helloworld.py
           key: helloworld
-      - name: see files
+
+      - name: See files
         run: ls
+
   retrieve_cache:
     runs-on: ubuntu-latest
     needs: create
@@ -26,10 +31,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - name: Restore cached math_operator.py
-        uses: actions/cache@v2
+      
+      - name: Restore cached helloworld.py
+        uses: actions/cache@v3
         with:
           key: helloworld
-          path: math.py
-      - name: retrieve cached file
-        run: ls
+          path: helloworld.py  # Correctly specify the path to restore
+
+      - name: Retrieve cached file
+        run: |
+          ls
+          python helloworld.py  # Run the file to see output
