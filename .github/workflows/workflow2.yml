@@ -18,13 +18,18 @@ jobs:
 
     - name: Display cached file content
       if: steps.cache.outputs.cache-hit == 'true'
-      run: cat math_operator.py
+      run: |
+        ls
+        cat math_operator.py
 
   print-data:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: print
+      run: ls
 
     - name: Restore cached math_operator.py
       uses: actions/cache@v2
