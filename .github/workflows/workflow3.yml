@@ -30,7 +30,4 @@ jobs:
           key: helloworld
           path: math.py
       - name: retrieve cached file
-        run: |
-          ls
-          cat math.py
-          python math.py
+        run: ls
