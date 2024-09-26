@@ -1,0 +1,20 @@
+name: Deploy My Code
+on: [push]
+jobs:
+  test_my_code:
+    steps:
+      - name: Get My Code
+        uses: actions/checkout@v2
+      - name: Test My Code
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Run Unit test
+        run: python -m unittest test_math_operations.py
+  deploy_my_code:
+    needs: [test_my_code]
+    steps:
+      - name: Get My Code
+        uses: actions/checkout@v2
+      - name: Deploy My Code
+        run: echo "Deploying My Code..."
