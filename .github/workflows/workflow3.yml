@@ -1,0 +1,30 @@
+name: Learning To Cache
+on: [push]
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Create python file  
+        run: echo 'print("Hello, World!")' > helloworld.py
+      - name: Cache helloworld file
+        uses: actions/cache@v3
+        with:
+          path: helloworld.py
+          key: helloworld
+  retrieve_cache:
+    runs-on: ubuntu-latest
+    needs: create
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: retrieve cached file
+        run: |
+          cat helloworld.py
+          python helloworld.py
