@@ -36,9 +36,9 @@ jobs:
         uses: actions/cache@v3
         with:
           key: helloworld
-          path: helloworld.py  # Correctly specify the path to restore
+          path: helloworld2.py  # Correctly specify the path to restore
 
       - name: Retrieve cached file
         run: |
           ls
-          python helloworld.py  # Run the file to see output
+          python helloworld2.py  # Run the file to see output
