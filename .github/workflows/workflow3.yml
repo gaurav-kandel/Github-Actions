@@ -24,7 +24,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      - name: Restore cached math_operator.py
+        uses: actions/cache@v2
+        with:
+          key: helloworld
+          path: math.py
       - name: retrieve cached file
         run: |
-          cat helloworld.py
-          python helloworld.py
+          ls
+          cat math.py
+          python math.py
